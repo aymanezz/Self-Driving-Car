@@ -85,10 +85,10 @@ def region_of_interest(canny):
     # only focus bottom half of the screen
 
     polygon = np.array([[
-        (250, 350),
-        (450, 350),
-        (800, height),
-        (200, height),
+        (500, height/2),
+        (700, height/2),
+        (1050, height),
+        (250, height),
     ]], np.int32)
 
     cv2.fillPoly(mask, polygon, 255)
