@@ -3,6 +3,7 @@ from Hand_Coded import LaneFollower
 import cv2
 import numpy as np
 import os
+import pandas as pd
 def show_image(title, frame):
 
      cv2.imshow(title, frame)
@@ -14,6 +15,7 @@ def save_Data(video_file):
 
     try:
         i = 0
+        steer = []
         while cap.isOpened():
             _, frame = cap.read()
             combo_image = lane_follower.follow_lane(frame)
@@ -28,6 +30,9 @@ def save_Data(video_file):
             cv2.imwrite("%s_%03d_%03d.png" % (video_file, i,
                                               lane_follower.curr_steering_angle),
                                                frame)
+            steer.append(str(video_file)+'_'+str(i)+'_'+str(lane_follower.curr_steering_angle)+'.png')
+            df = pd.DataFrame(steer)
+            df.to_excel('steer.xlsx')
             i += 1
 
 
